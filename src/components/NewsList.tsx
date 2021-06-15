@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC } from "react"
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import * as API from "../utils/api"
 import { NewsType } from "../types/NewsType"
 
@@ -16,7 +16,7 @@ const NewsList: FC = () => {
     console.log("detay açılır " + news.caption)
   }
   return (
-    <ScrollView>
+    <ScrollView >
       {newsList?.map(news =>
         <TouchableOpacity key={news.id} style={styles.container} onPress={() => onNewsClick(news)}>
           <Text style={styles.greeting} >{news.caption}</Text>
@@ -33,9 +33,7 @@ const NewsList: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+
   },
   greeting: {
     fontSize: 20,
@@ -43,8 +41,9 @@ const styles = StyleSheet.create({
     margin: 16
   },
   logo: {
-    width: "100%",
-    height: 300,
+    width:'auto',
+    height:300
+
   },
 });
 
