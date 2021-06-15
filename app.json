@@ -1,0 +1,12 @@
+{
+  "name": "tskulis-app",
+  "displayName": "tskulis-app",
+  "expo": {
+    "name": "tskulis-app",
+    "slug": "tskulis-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
