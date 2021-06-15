@@ -1,11 +1,15 @@
 import React, { useState, useEffect, FC } from "react"
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 import * as API from "../utils/api"
 import { NewsType } from "../types/NewsType"
+import NewsCard from "../components/NewsCard"
+import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native"
 
 
 const NewsList: FC = () => {
   const [newsList, setNewsList] = useState<NewsType[]>()
+
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   useEffect(() => {
     API.getNewsList().then(result => {
@@ -13,38 +17,18 @@ const NewsList: FC = () => {
     })
   }, [])
   const onNewsClick = (news: NewsType) => {
-    console.log("detay açılır " + news.caption)
+    navigation.navigate("NewsDetail", news)
   }
   return (
-    <ScrollView >
+    <ScrollView style={{ marginTop: 66 }} >
       {newsList?.map(news =>
-        <TouchableOpacity key={news.id} style={styles.container} onPress={() => onNewsClick(news)}>
-          <Text style={styles.greeting} >{news.caption}</Text>
-          <Image style={styles.logo}
-            source={{
-              uri: news.imgPath,
-            }}
-          />
+        <TouchableOpacity key={news.id} onPress={() => onNewsClick(news)}>
+          {NewsCard(news)}
         </TouchableOpacity>
       )}
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-
-  },
-  greeting: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    margin: 16
-  },
-  logo: {
-    width:'auto',
-    height:300
-
-  },
-});
 
 export default NewsList;
